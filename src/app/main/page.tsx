@@ -71,17 +71,17 @@ export default function HeroBanner() {
             {
                 title: "Resume Parser",
                 link: "/pages/prowin.html",
-                color: "bg-blue-100 border-blue-500"
+                color: "gradient-border"
             },
             {
                 title: "ProWin Prep",
                 link: "/pages/prowin.html",
-                color: "bg-indigo-600 text-white"
+                color: "gradient-bg text-white"
             },
             {
                 title: "AI Chatbot Requirement",
                 link: "/pages/prowin.html",
-                color: "bg-green-100 border-green-500"
+                color: "gradient-border"
             }
         ],
         stats: [
@@ -126,7 +126,7 @@ export default function HeroBanner() {
 
     return (
         <>
-            <div className="bg-gradient-to-b from-blue-400 to-indigo-800 text-white py-20">
+            <div className="gradient-bg from-blue-400 to-indigo-800 text-white py-20">
                 <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
                     <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
                         <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -197,7 +197,7 @@ export default function HeroBanner() {
                 </div>
             </div>
 
-            <div className="bg-gradient-to-r from-blue-500 to-indigo-600 py-16">
+            <div className="gradient-bg from-blue-500 to-indigo-600 py-16">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-wrap justify-between items-center">
                         {content.stats.map((stat, index) => (
@@ -224,7 +224,7 @@ export default function HeroBanner() {
                                 <div className="md:w-1/2 p-8">
                                     <Image src={product.logo} alt={product.name} width={200} height={100} className="mb-6" />
                                     <p className="text-gray-600 mb-6">{product.description}</p>
-                                    <Link href={product.link} className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition duration-300">
+                                    <Link href={product.link} className="gradient-bg text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition duration-300">
                                         Visit {product.name}
                                     </Link>
                                 </div>
@@ -232,7 +232,7 @@ export default function HeroBanner() {
                                     <Slider {...settings}>
                                         {product.images.map((image, imgIndex) => (
                                             <div key={imgIndex}>
-                                                <Image src={image} alt={`${product.name} ${imgIndex + 1}`} width={500} height={300} className="rounded-lg shadow-md" />
+                                                <Image src={image} alt={`${product.name} ${imgIndex + 1}`} width={500} height={300} className="rounded-lg" />
                                             </div>
                                         ))}
                                     </Slider>
@@ -251,7 +251,7 @@ export default function HeroBanner() {
                         {content.supportingProducts.map((product, index) => (
                             <div key={index} className={`rounded-lg shadow-lg p-6 ${product.color}`}>
                                 <h3 className="text-xl font-semibold mb-4">{product.title}</h3>
-                                <Link href={product.link} className="inline-block mt-4 bg-white text-indigo-600 px-4 py-2 rounded-md hover:bg-indigo-100 transition duration-300">
+                                <Link href={product.link} className="inline-block mt-4 gradient-bg text-white-600 px-4 py-2 rounded-md hover:bg-indigo-100 transition duration-300">
                                     Learn More -&gt;
                                 </Link>
                             </div>

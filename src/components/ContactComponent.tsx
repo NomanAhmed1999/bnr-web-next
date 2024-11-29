@@ -185,35 +185,50 @@ export default function ContactComponent() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-blue-600 text-white py-20">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.hero.title}</h1>
-          <p className="text-xl mb-2">{content.hero.subtitle}</p>
-          <p className="text-lg">{content.hero.description}</p>
-        </div>
-      </section>
+      <section className="gradient-bg text-white py-20">
+  <div className="container mx-auto px-4 flex flex-wrap md:flex-nowrap items-start gap-8">
+    {/* Hero Section */}
+    <div className="md:w-1/2">
+      <h1 className="text-4xl md:text-5xl font-bold mb-4 mt-12">{content.hero.title}</h1>
+      <p className="text-xl mb-2">{content.hero.subtitle}</p>
+      <p className="text-lg">{content.hero.description}</p>
+    </div>
 
-      {/* Contact Boxes */}
-      <section className="py-10">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8">
-            {content.contactBoxes.map((box, index) => (
-              <div key={index} className="bg-gray-100 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300">
-                <h3 className="text-2xl font-semibold mb-4">{box.title}</h3>
-                <p className="mb-4">{box.description}</p>
-                <p className="mb-2">
-                  <i className="fas fa-envelope mr-2"></i>
-                  <a href={`mailto:${box.email}`} className="text-blue-600 hover:underline">{box.email}</a>
-                </p>
-                <p>
-                  <i className="fas fa-phone mr-2"></i>
-                  <a href={`tel:${box.phone}`} className="text-blue-600 hover:underline">{box.phone}</a>
-                </p>
-              </div>
-            ))}
+    {/* Contact Boxes */}
+    <div className="md:w-1/2">
+      <div className="grid md:grid-cols-2 gap-8">
+        {content.contactBoxes.map((box, index) => (
+          <div
+            key={index}
+            className="bg-gray-100 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300"
+          >
+            <h3 className="text-2xl font-semibold mb-4">{box.title}</h3>
+            <p className="mb-4">{box.description}</p>
+            <p className="mb-2">
+              <i className="fas fa-envelope mr-2"></i>
+              <a
+                href={`mailto:${box.email}`}
+                className="text-blue-600 hover:underline"
+              >
+                {box.email}
+              </a>
+            </p>
+            <p>
+              <i className="fas fa-phone mr-2"></i>
+              <a
+                href={`tel:${box.phone}`}
+                className="text-blue-600 hover:underline"
+              >
+                {box.phone}
+              </a>
+            </p>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Contact Form */}
       <section className="py-10 bg-gray-100">
