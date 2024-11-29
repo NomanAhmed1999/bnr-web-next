@@ -6,7 +6,8 @@ import Image from 'next/image'
 import Slider from 'react-slick'
 
 export default function HeroBanner() {
-    const [content, setContent] = useState({
+    const [content, setContent] = useState(
+        {
         heroWords: ['Manage', 'Track', 'Automate', 'Outsource'],
         heroColors: ['#212040', '#da0001', '#f57d3f', '#f321b0'],
         currentWordIndex: 0,
@@ -100,7 +101,8 @@ export default function HeroBanner() {
                 position: "COO, CCI"
             }
         ]
-    })
+    }
+)
 
     const settings = {
         dots: true,

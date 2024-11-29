@@ -1,7 +1,7 @@
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
+import SphereComponent from '@/components/Sphere'
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import SphereComponent from '../components/Sphere'
 
 function Sphere() {
     return (

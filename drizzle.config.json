@@ -1,0 +1,5 @@
+{
+    "schema": "./app/drizzle/schema.ts",
+    "out": "./app/drizzle/migrations"
+  }
+  
