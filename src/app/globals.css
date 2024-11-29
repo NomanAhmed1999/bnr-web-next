@@ -94,3 +94,12 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.gradient-bg {
+  background: linear-gradient(180deg, #439cd9, #37376b);
+  color: white;
+}
+
+.gradient-border{
+  border: 2px solid #37376b;
+}
