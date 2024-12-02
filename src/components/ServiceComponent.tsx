@@ -88,10 +88,10 @@ export default function ServiceComponent() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gray-100 py-20">
+      <section className="gradient-bg py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="md:w-1/2 mb-10 md:mb-0">
+            <div className="mb-10 md:mb-0">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
               <p className="text-lg mb-8">{content.hero.description}</p>
               <div className="space-x-4">
@@ -103,13 +103,13 @@ export default function ServiceComponent() {
                 </Link>
               </div>
             </div>
-            <div className="md:w-1/2">
+            <div className="">
               <Image 
                 src={content.hero.image}
                 alt="BnR360 Service Image"
-                width={500}
-                height={300}
-                className="rounded-lg shadow-xl"
+                width={400}
+                height={200}
+                className="rounded-lg"
               />
             </div>
           </div>
@@ -138,7 +138,7 @@ export default function ServiceComponent() {
                   alt={service.title}
                   width={500}
                   height={300}
-                  className="rounded-lg shadow-xl"
+                  className="rounded-lg"
                 />
               </div>
             </div>
@@ -159,7 +159,7 @@ export default function ServiceComponent() {
               alt="Pricing Plans"
               width={800}
               height={400}
-              className="rounded-lg shadow-xl"
+              className="rounded-lg"
             />
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function ServiceComponent() {
       </section>
 
       {/* Why Choose BnR360 Section */}
-      <section className="bg-gray-100 py-20">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Why Choose <span className="text-blue-600">BnR360</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -204,10 +204,10 @@ export default function ServiceComponent() {
                   alt={item.title}
                   width={64}
                   height={64}
-                  className="mb-4"
+                  className="mb-4 mx-auto"
                 />
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
+                <h3 className="text-xl font-semibold mb-2 text-center">{item.title}</h3>
+                <p className="text-gray-600 text-center">{item.description}</p>
               </div>
             ))}
           </div>

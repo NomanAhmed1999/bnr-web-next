@@ -7,10 +7,10 @@ export default function SolutionPage() {
 
 
       <main className="flex-grow">
-        <section className="wrap-banner bg-gradient-to-r from-blue-500 to-purple-600 text-white py-16">
+        <section className="wrap-banner gradient-bg to-purple-600 text-white py-16">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center">
-              <div className="md:w-1/2 mb-8 md:mb-0">
+              <div className="mb-8 md:mb-0">
                 <h2 className="text-4xl font-bold mb-4">BnR360 Solutions: Your Growth Partner</h2>
                 <p className="mb-6">
                   At BnR360, we believe in making business growth simple. Whether you're just starting out or ready to scale, 
@@ -23,7 +23,7 @@ export default function SolutionPage() {
                 </Link>
               </div>
               <div className="md:w-1/2">
-                <Image src="/images/Mobile.webp" alt="BnR360 Service Image" width={500} height={300} className="rounded-lg shadow-lg" />
+                <Image src="/images/Mobile.webp" alt="BnR360 Service Image" width={400} height={300} className="rounded-lg" />
               </div>
             </div>
           </div>
@@ -58,7 +58,7 @@ export default function SolutionPage() {
             </div>
             
             <div className="text-center mt-12">
-              <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
+              <Link href="/contact" className="inline-block gradient-bg text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
                 Let's Get Started →
               </Link>
             </div>
@@ -87,19 +87,19 @@ export default function SolutionPage() {
                 <h2 className="text-2xl font-semibold mb-4">Why Choose This Package?</h2>
                 <p className="mb-4">You've put in the hard work, now it's time to scale. We help you grow strategically, so you don't lose control or quality.</p>
 
-                <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
+                <Link href="/contact" className="inline-block gradient-bg text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
                   Let's Talk Growth →
                 </Link>
               </div>
 
               <div className="md:w-1/2">
-                <Image src="/images/smartprocess.jpg" alt="Growth Image" width={500} height={300} className="rounded-lg shadow-lg" />
+                <Image src="/images/smartprocess.jpg" alt="Growth Image" width={500} height={300} className="rounded-lg" />
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-16 bg-gray-100">
+        <section className="py-16">
           <div className="container mx-auto px-4">
             <h1 className="text-3xl font-bold text-center mb-8"><span className="text-blue-600">Government</span> Contracts Made Easy</h1>
 
@@ -124,26 +124,26 @@ export default function SolutionPage() {
                   </li>
                 </ul>
 
-                <Link href="/contact" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300 mt-8">
+                <Link href="/contact" className="inline-block gradient-bg text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300 mt-8">
                   See How We Can Help →
                 </Link>
               </div>
 
               <div className="md:w-1/2">
-                <Image src="/images/contract.jpg" alt="Government Contracts Image" width={500} height={300} className="rounded-lg shadow-lg" />
+                <Image src="/images/contract.jpg" alt="Government Contracts Image" width={500} height={300} className="rounded-lg" />
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-16 bg-blue-600 text-white">
+        <section className="py-16 bg-gray-200  text-black">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl font-bold mb-4">Customize Your Success</h1>
             <p className="mb-8 max-w-2xl mx-auto">
               We know one size doesn't fit all. That's why we offer custom solutions for agencies that need a little bit more—or less. 
               Whether you need an extra recruiter, more administrative support, or expert bid writers, we'll build a package that's right for you.
             </p>
-            <Link href="/contact" className="inline-block bg-white text-blue-600 px-6 py-3 rounded-md hover:bg-gray-100 transition duration-300">
+            <Link href="/contact" className="inline-block gradient-bg text-blue-600 px-6 py-3 rounded-md hover:bg-gray-100 transition duration-300">
               Start Building Your Custom Plan →
             </Link>
           </div>
