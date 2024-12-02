@@ -196,42 +196,234 @@ export default function ContactComponent() {
 
     {/* Contact Boxes */}
     <div className="md:w-1/2">
-      <div className="grid md:grid-cols-2 gap-8">
-        {content.contactBoxes.map((box, index) => (
-          <div
-            key={index}
-            className="bg-gray-100 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300"
-          >
-            <h3 className="text-2xl font-semibold mb-4">{box.title}</h3>
-            <p className="mb-4">{box.description}</p>
-            <p className="mb-2">
-              <i className="fas fa-envelope mr-2"></i>
-              <a
-                href={`mailto:${box.email}`}
-                className="text-blue-600 hover:underline"
-              >
-                {box.email}
-              </a>
-            </p>
-            <p>
-              <i className="fas fa-phone mr-2"></i>
-              <a
-                href={`tel:${box.phone}`}
-                className="text-blue-600 hover:underline"
-              >
-                {box.phone}
-              </a>
-            </p>
-          </div>
-        ))}
-      </div>
+    <div className="grid md:grid-cols-2">
+  {content.contactBoxes.map((box, index) => (
+    <div
+      key={index}
+      className={`bg-gray-100 text-black p-6 rounded-lg shadow-md transform transition duration-300 ${
+        index % 2 === 0
+          ? '[transform:perspective(50em)_rotateY(25deg)]'
+          : '[transform:perspective(50em)_rotateY(-25deg)]'
+      } hover:[transform:perspective(50em)_rotateY(0deg)]`}
+    >
+      <h3 className="text-2xl font-semibold mb-4">{box.title}</h3>
+      <p className="mb-4">{box.description}</p>
+      <p className="mb-2">
+        <i className="fas fa-envelope mr-2"></i>
+        <a
+          href={`mailto:${box.email}`}
+          className="text-blue-600 hover:underline"
+        >
+          {box.email}
+        </a>
+      </p>
+      <p>
+        <i className="fas fa-phone mr-2"></i>
+        <a
+          href={`tel:${box.phone}`}
+          className="text-blue-600 hover:underline"
+        >
+          {box.phone}
+        </a>
+      </p>
+    </div>
+  ))}
+</div>
+
     </div>
   </div>
 </section>
 
 
       {/* Contact Form */}
-      <section className="py-10 bg-gray-100">
+      <section className="py-10">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-8">Let's Connect!</h2>
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="firstName" className="block font-medium mb-1">
+                First Name*
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
+                  placeholder="Enter your first name"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="lastName" className="block font-medium mb-1">
+                Last Name*
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
+                  placeholder="Enter your last name"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block font-medium mb-1">
+                Email*
+              </label>
+              <div className="relative">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
+                  placeholder="Enter your email"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="phoneNumber" className="block font-medium mb-1">
+                Phone Number
+              </label>
+              <div className="relative">
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="organizationType" className="block font-medium mb-1">
+                Organization Type*
+              </label>
+              <select
+                id="organizationType"
+                name="organizationType"
+                value={formData.organizationType}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
+              >
+                <option value="">Select organization type</option>
+                <option value="1">Bidding and Recruiting</option>
+                <option value="2">Talent Acquisition</option>
+                <option value="3">Corporate HR</option>
+                <option value="4">Proposal Writing Firm</option>
+                <option value="5">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="requestType" className="block font-medium mb-1">
+                Request Type*
+              </label>
+              <select
+                id="requestType"
+                name="requestType"
+                value={formData.requestType}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
+              >
+                <option value="">Select request type</option>
+                <option value="Products">Products</option>
+                <option value="Services">Services</option>
+                <option value="Solutions">Solutions (Products & Services)</option>
+                <option value="Customer Support">Customer Support</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="country" className="block font-medium mb-1">
+                Country*
+              </label>
+              <select
+                id="country"
+                name="country"
+                value={formData.country}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
+              >
+                <option value="">Select your country</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="India">India</option>
+                <option value="United States">United States</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Australia">Australia</option>
+                <option value="Canada">Canada</option>
+                {/* Add more countries as needed */}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="numUsers" className="block font-medium mb-1">
+                Number of Users
+              </label>
+              <div className="relative">
+                <input
+                  type="number"
+                  id="numUsers"
+                  name="numUsers"
+                  value={formData.numUsers}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
+                  placeholder="Enter number of users"
+                />
+              </div>
+            </div>
+
+            <div className="md:col-span-2">
+              <label htmlFor="description" className="block font-medium mb-1">
+                Description
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                rows={4}
+                className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300 focus:outline-none"
+                placeholder="Describe your request"
+              ></textarea>
+            </div>
+          </div>
+
+          <div className="mt-6 text-center">
+            <button
+              type="submit"
+              className="px-6 py-3 gradient-bg text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+            >
+              Submit <i className="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+      {/* <section className="py-10 bg-gray-100">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Let's Connect!</h2>
           <form onSubmit={handleSubmit} className="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
@@ -300,7 +492,7 @@ export default function ContactComponent() {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
 
       {/* Map Section */}
       <section className="py-10">
