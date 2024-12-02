@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import ProwinComponent from '../components/ProwinComponent'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import ProwinComponent from '@/components/ProwinComponent'
 
 function Prowin() {
     return (

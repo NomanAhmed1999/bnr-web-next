@@ -1,6 +1,6 @@
-import Footer from '@/app/components/Footer'
-import Header from '@/app/components/Header'
-import SpecificBlog from '@/app/components/SpecificBlog'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
+import SpecificBlog from '@/components/SpecificBlog'
 import React from 'react'
 
 function Prowin() {
