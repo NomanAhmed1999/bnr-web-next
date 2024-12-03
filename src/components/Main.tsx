@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Slider from 'react-slick'
+import { ApiEndPoint } from '@/lib/utils'
 
 export default function MainComponent() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -37,54 +38,54 @@ export default function MainComponent() {
             {
                 title: "Full Bid Management",
                 description: "Manage the entire bidding process, from RFP analysis to proposal submission, ensuring accuracy and compliance every time.",
-                icon: "/images/track bids.png"
+                icon: "images/track bids.png"
             },
             {
                 title: "Turnkey Recruitment Solutions",
                 description: "From sourcing to onboarding, our complete recruitment management services streamline every stage of the hiring process.",
-                icon: "/images/write parposal 1.png"
+                icon: "images/write parposal 1.png"
             },
             {
                 title: "Custom On-Demand Services",
                 description: "Tailor your services to your specific needs, with flexible, pay-as-you-go support for bid writing, resume parsing, and more.",
-                icon: "/images/parse doc 1.png"
+                icon: "images/parse doc 1.png"
             },
             {
                 title: "Strategic Growth & Scaling",
                 description: "Optimize your operations for growth with our advanced process automation and expert consultancy services.",
-                icon: "/images/manage clients 1.png"
+                icon: "images/manage clients 1.png"
             },
             {
                 title: "Data Insights & Reporting",
                 description: "Leverage real-time analytics and customizable reports to make informed business decisions and track your progress.",
-                icon: "/images/generate reposts 1.png"
+                icon: "images/generate reposts 1.png"
             },
             {
                 title: "Security & Compliance",
                 description: "Rest easy with our top-tier data security measures and compliance protocols, ensuring safe and secure operations.",
-                icon: "/images/customize workflow 1.png"
+                icon: "images/customize workflow 1.png"
             }
         ],
         products: [
             {
                 name: "Sphere",
-                logo: "/images/spheres.webp",
+                logo: "images/spheres.webp",
                 description: "Dive into a world where resumes are effortlessly parsed, RFPs and bids are seamlessly tracked, and decision-making is powered by an interactive dashboard. With Sphere, organizing interviews, managing applicant databases, and ensuring real-time workflow transparency becomes second nature. Our integrated ERP, CRM, and Data Analytics tools, alongside a dedicated security management module, ensure that your operations are efficient and secure.",
                 images: [
-                    "/images/intutiveFlow.png",
-                    "/images/reportingDashboard.png",
-                    "/images/sphere-banner.png"
+                    "images/intutiveFlow.png",
+                    "images/reportingDashboard.png",
+                    "images/sphere-banner.png"
                 ],
                 link: "/pages/sphere.html"
             },
             {
                 name: "GenRapide",
-                logo: "/images/GenRapide Logo-new.webp",
+                logo: "images/GenRapide Logo-new.webp",
                 description: "The breakthrough platform transforming talent acquisition and proposal management. With our ProReshape module, reshape and enrich resumes to meet exacting standards, while RFPDecoder uses Generative AI to quickly distill RFP essentials. GenRapide simplifies it with a user-friendly dashboard for credit monitoring, user roles, and activity tracking.",
                 images: [
-                    "/images/GenRapide 1.webp",
-                    "/images/GenRapide 2.webp",
-                    "/images/GenRapide 3.webp"
+                    "images/GenRapide 1.webp",
+                    "images/GenRapide 2.webp",
+                    "images/GenRapide 3.webp"
                 ],
                 link: "/pages/genrapide.html"
             }
@@ -145,9 +146,9 @@ export default function MainComponent() {
             if (!response.ok) throw new Error('Failed to fetch data');
             
             const result = await response.json();
-            console.log(result.data);
+            console.log(result);
             
-            // setData(result.data);
+            setData(result);
           } catch (err: any) {
             setError(err.message);
             setLoading(false);
@@ -166,6 +167,11 @@ export default function MainComponent() {
     
         return () => clearInterval(interval);
     }, [currentWordIndex]); // Add currentWordIndex as a dependency
+
+
+    const myLoader=({src}: any)=>{
+        return `${ApiEndPoint}${src}`;
+      }
 
 
   if (loading) return <p>Loading...</p>;
@@ -237,7 +243,7 @@ export default function MainComponent() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {data.offerings.map((offering, index) => (
                             <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center">
-                                <Image src={offering.icon} alt={offering.title} width={100} height={100} className="mx-auto mb-4" />
+                                <Image loader={myLoader} src={offering.icon} alt={offering.title} width={100} height={100} className="mx-auto mb-4" />
                                 <h3 className="text-xl font-semibold mb-2">{offering.title}</h3>
                                 <p className="text-gray-600">{offering.description}</p>
                             </div>
@@ -271,9 +277,9 @@ export default function MainComponent() {
                         <div key={index} className={`mb-16 ${index % 2 === 0 ? '' : 'bg-gray-100'}`}>
                             <div className="flex flex-col md:flex-row items-center">
                                 <div className="md:w-1/2 p-8">
-                                    <Image src={product.logo} alt={product.name} width={200} height={100} className="mb-6" />
+                                    <Image loader={myLoader} src={product.logo} alt={product.name} width={200} height={100} className="mb-6" />
                                     <p className="text-gray-600 mb-6">{product.description}</p>
-                                    <Link href={product.link} className="gradient-bg text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition duration-300">
+                                    <Link href={product.link || '#'} className="gradient-bg text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition duration-300">
                                         Visit {product.name}
                                     </Link>
                                 </div>
@@ -281,7 +287,7 @@ export default function MainComponent() {
                                     <Slider {...settings}>
                                         {product.images.map((image, imgIndex) => (
                                             <div key={imgIndex}>
-                                                <Image src={image} alt={`${product.name} ${imgIndex + 1}`} width={500} height={300} className="rounded-lg" />
+                                                <Image loader={myLoader} src={image} alt={`${product.name} ${imgIndex + 1}`} width={500} height={300} className="rounded-lg" />
                                             </div>
                                         ))}
                                     </Slider>
