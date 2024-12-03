@@ -79,7 +79,7 @@ export default function CaseStudyComponent() {
       {/* Hero Section */}
       <section className="relative text-white py-20" style={{background: 'linear-gradient(180deg, #439cd9, #37376b)'}}>
         <div className="container mx-auto px-4">
-          <div className="flex flex-col gap-4 max-w-3xl">
+          <div className="flex flex-col gap-4 mx-auto py-10 max-w-6xl">
             <h1 className="text-4xl md:text-5xl font-bold">{content.hero.title}</h1>
             <p className="text-xl">{content.hero.subtitle}</p>
           </div>
@@ -89,27 +89,27 @@ export default function CaseStudyComponent() {
       {/* Introduction Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center md:text-left">
+          <div className="text-center">
             <h2 className="text-3xl font-bold mb-4">{content.introduction.title}</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto md:mx-0 mb-6"></div>
+            <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
             {content.introduction.paragraphs.map((paragraph, index) => (
-              <p key={index} className="text-lg leading-relaxed text-gray-700 mb-4">{paragraph}</p>
+              <p key={index} className="leading-relaxed text-gray-700 mb-4">{paragraph}</p>
             ))}
           </div>
         </div>
       </section>
 
       {/* Challenges Section */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <Image src="/images/challenge-faced.jpg" alt="Challenges Faced" width={600} height={400} className="rounded-lg shadow-md" />
+              <Image src="/images/challenge-faced.jpg" alt="Challenges Faced" width={600} height={400} className="rounded-lg" />
             </div>
             <div className="w-full md:w-1/2 md:pl-8">
               <h2 className="text-3xl font-bold mb-4">{content.challenges.title}</h2>
               <p className="text-lg leading-relaxed text-gray-700 mb-4">{content.challenges.description}</p>
-              <ul className="list-disc pl-5 text-gray-700">
+              <ul className="list-disc pl-5 text-gray-700 list-none">
                 {content.challenges.list.map((item, index) => (
                   <li key={index} className="mb-2">{item}</li>
                 ))}
@@ -120,14 +120,14 @@ export default function CaseStudyComponent() {
       </section>
 
       {/* Approach Section */}
-      <section className="py-16">
+      <section className="py-16  bg-gray-100">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">{content.approach.title}</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white shadow-lg rounded-lg p-8">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4 pb-2 border-b-2 border-gray-300">{content.approach.operationalSupport.title}</h3>
               <p className="text-gray-600 mb-4">{content.approach.operationalSupport.description}</p>
-              <ul className="list-disc pl-5 space-y-2 text-gray-600">
+              <ul className="list-disc pl-5 space-y-2 text-gray-600 list-none">
                 {content.approach.operationalSupport.list.map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
@@ -136,7 +136,7 @@ export default function CaseStudyComponent() {
             <div className="bg-white shadow-lg rounded-lg p-8">
               <h3 className="text-2xl font-semibold text-gray-800 mb-4 pb-2 border-b-2 border-gray-300">{content.approach.processImprovement.title}</h3>
               <p className="text-gray-600 mb-4">{content.approach.processImprovement.description}</p>
-              <ul className="list-disc pl-5 space-y-2 text-gray-600">
+              <ul className="list-disc pl-5 space-y-2 text-gray-600 list-none">
                 {content.approach.processImprovement.list.map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
@@ -147,7 +147,7 @@ export default function CaseStudyComponent() {
       </section>
 
       {/* Results Section */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8">{content.results.title}</h2>
           <p className="text-lg leading-relaxed mb-12">{content.results.description}</p>
@@ -163,7 +163,7 @@ export default function CaseStudyComponent() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="py-16 bg-blue-600 text-white">
+      <section className="py-16 text-white max-w-6xl mx-auto rounded-lg" style={{ backgroundColor: '#002a5e'}}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-xl italic mb-4">"{content.testimonial.quote}"</p>

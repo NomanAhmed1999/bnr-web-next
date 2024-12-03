@@ -135,13 +135,13 @@ export default function GenRapidePage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gray-100 py-20">
+      <section className="gradient-bg py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-1/2 mb-10 md:mb-0">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
               <p className="text-lg mb-8">{content.hero.description}</p>
-              <Link href={content.hero.cta.link} className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
+              <Link href={content.hero.cta.link} className="border-2 text-white text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
                 {content.hero.cta.text}
               </Link>
             </div>
@@ -151,7 +151,7 @@ export default function GenRapidePage() {
                 alt="GenRapide Banner"
                 width={500}
                 height={300}
-                className="rounded-lg shadow-xl"
+                className="rounded-lg"
               />
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function GenRapidePage() {
       </section>
 
       {/* Resume Section */}
-      <section className="py-20 bg-blue-600 text-white">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{content.resume.title}</h2>
@@ -171,7 +171,7 @@ export default function GenRapidePage() {
               alt="Resume"
               width={800}
               height={400}
-              className="rounded-lg shadow-xl"
+              className="rounded-lg"
             />
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function GenRapidePage() {
                 alt={`RFP Image ${index + 1}`}
                 width={300}
                 height={200}
-                className="rounded-lg shadow-xl"
+                className="rounded-lg"
               />
             ))}
           </div>
@@ -205,7 +205,7 @@ export default function GenRapidePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{content.insights.title}</h2>
             <p className="text-xl mb-8">{content.insights.description}</p>
-            <Link href={content.insights.cta.link} className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
+            <Link href={content.insights.cta.link} className="gradient-bg text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
               {content.insights.cta.text}
             </Link>
           </div>
@@ -215,7 +215,7 @@ export default function GenRapidePage() {
               alt="Insights Dashboard"
               width={800}
               height={400}
-              className="rounded-lg shadow-xl"
+              className="rounded-lg"
             />
           </div>
         </div>
@@ -230,7 +230,7 @@ export default function GenRapidePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {content.modules.items.map((module, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-xl">
+              <div key={index} className="bg-white p-6 rounded-lg border-2">
                 <h3 className="text-2xl font-bold mb-4">{module.title}</h3>
                 <p>{module.description}</p>
               </div>
@@ -250,9 +250,9 @@ export default function GenRapidePage() {
               alt="YouTube Tablet"
               width={800}
               height={400}
-              className="rounded-lg shadow-xl mb-8"
+              className="rounded-lg mb-8 mx-auto"
             />
-            <Link href={content.youtube.cta.link} className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
+            <Link href={content.youtube.cta.link} className="gradient-bg text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
               {content.youtube.cta.text}
             </Link>
           </div>
@@ -260,13 +260,13 @@ export default function GenRapidePage() {
       </section>
 
       {/* Blog Section */}
-      <section className="py-20">
+      <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="md:w-1/2 mb-10 md:mb-0">
+            <div className="mb-10 md:mb-0">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{content.blog.title}</h2>
               <p className="text-xl mb-8">{content.blog.description}</p>
-              <Link href={content.blog.cta.link} className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
+              <Link href={content.blog.cta.link} className="gradient-bg text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
                 {content.blog.cta.text}
               </Link>
             </div>
@@ -274,9 +274,9 @@ export default function GenRapidePage() {
               <Image 
                 src={content.blog.image}
                 alt="Blog Reference"
-                width={500}
+                width={100}
                 height={300}
-                className="rounded-lg shadow-xl"
+                className="rounded-lg"
               />
             </div>
           </div>
@@ -303,11 +303,11 @@ export default function GenRapidePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-600 text-white">
+      <section className="py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{content.cta.title}</h2>
           <p className="text-xl mb-8">{content.cta.description}</p>
-          <Link href={content.cta.button.link} className="bg-white text-blue-600 px-8 py-3 rounded-md hover:bg-gray-100 transition duration-300 text-lg font-semibold">
+          <Link href={content.cta.button.link} className="gradient-bg px-8 py-3 rounded-md hover:bg-gray-100 transition duration-300 text-lg font-semibold">
             {content.
 cta.button.text}
           </Link>

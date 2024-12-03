@@ -280,7 +280,7 @@ export default function Header() {
                 {item === 'Resources' && (
                   <div className="hidden group-hover:block fixed left-5 w-[calc(100vw-40px)] max-w-[1300px] pb-20 bg-white rounded-lg shadow-xl">
                     <div className="flex pt-10 justify-center items-center gap-10 flex-wrap">
-                      {[{name: 'Blogs', link: '/blog'}, {name: 'Customer Stories', link: '/case-study'}, {name: 'Press Release', link: '/growth'}, {name: 'Contact Us', link: '/contact'}].map((resourceItem) => (
+                      {[{name: 'Blogs', link: '/blogs'}, {name: 'Customer Stories', link: '/case-study'}, {name: 'Press Release', link: '/growth'}, {name: 'Contact Us', link: '/contact'}].map((resourceItem) => (
                         <Link key={resourceItem.name} href={resourceItem.link} className='bg-gray-200 text-black rounded-md text-lg px-8 py-5 hover:bg-gradient-to-b hover:from-[#439cd9] hover:to-[#37376b] hover:text-white transition-all duration-500'>
                           {resourceItem.name}
                         </Link>
