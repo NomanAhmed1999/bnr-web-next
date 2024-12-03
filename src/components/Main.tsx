@@ -141,7 +141,7 @@ export default function MainComponent() {
         const fetchData = async () => {
             setLoading(true);
           try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/website-content/`);
+            const response = await fetch(`https://www.test.dc3worx.ca/api/website-content/`);
             if (!response.ok) throw new Error('Failed to fetch data');
             
             const result = await response.json();
