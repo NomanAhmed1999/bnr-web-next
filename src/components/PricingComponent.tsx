@@ -285,14 +285,14 @@ export default function PricingPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gray-100 py-20">
-        <div className="container mx-auto px-4">
+      <section className="gradient-bg py-20">
+        <div className="container mx-auto px-4 py-10">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-1/2 mb-10 md:mb-0">
               <h1 
 className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
               <p className="text-lg mb-8">{content.hero.description}</p>
-              <Link href="#checkpricing" className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
+              <Link href="#checkpricing" className="border-2 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
                 Check pricing
               </Link>
             </div>
@@ -320,7 +320,7 @@ className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
             {content.tabs.map((tab) => (
               <button
                 key={tab}
-                className={`px-4 py-2 m-2 rounded-md ${activeTab === tab ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+                className={`px-4 py-2 m-2 rounded-md ${activeTab === tab ? 'gradient-bg text-white' : 'bg-gray-200 text-gray-800'}`}
                 onClick={() => setActiveTab(tab)}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -367,16 +367,27 @@ className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
                   <p className="mb-6">{plan.description}</p>
                   <Link
                     href={plan.cta.link}
-                    className="block w-full text-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+                    className="block w-full text-center gradient-bg text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
                   >
                     {plan.cta.text}
                   </Link>
                   <ul className="mt-6 space-y-2">
                     {plan.features && plan.features.map((feature: any, featureIndex: number) => (
                       <li key={featureIndex} className="flex items-center">
-                        <span className="mr-2">{feature.value.startsWith('✔') ? '✅' : '❌'}</span>
-                        {feature.name}: {feature.value.replace(/^[✔✘]\s/, '')}
-                      </li>
+                      <span className="mr-2">
+                        {feature.value.startsWith('✔') ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        )}
+                      </span>
+                      {feature.name}: {feature.value.replace(/^[✔✘]\s/, '')}
+                    </li>
+                    
                     ))}
                   </ul>
                 </div>
@@ -403,7 +414,7 @@ className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
                     <p className="text-2xl font-bold mb-4">{plan.price}</p>
                     <Link
                       href={plan.cta.link}
-                      className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+                      className="gradient-bg text-white px-6 py-2 rounded-md transition duration-300"
                     >
                       {plan.cta.text}
                     </Link>

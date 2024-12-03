@@ -89,8 +89,8 @@ export default function ProWinPage() {
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <section className="bg-gray-100 py-20">
-        <div className="container mx-auto px-4">
+      <section className="gradient-bg py-20">
+        <div className="container mx-auto px-4 py-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
             <p className="text-xl mb-8">{content.hero.description}</p>
@@ -154,8 +154,8 @@ export default function ProWinPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">{content.bundleOffer.title}</h2>
           <p className="text-xl mb-4">{content.bundleOffer.description}</p>
-          <p className="text-2xl font-bold text-blue-600 mb-8">{content.bundleOffer.discount}</p>
-          <Link href="/pricing" className="bg-blue-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300">
+          <p className="text-2xl font-bold mb-8">{content.bundleOffer.discount}</p>
+          <Link href="/pricing" className="gradient-bg text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300">
             Special Pricing →
           </Link>
         </div>
@@ -166,12 +166,12 @@ export default function ProWinPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">{content.whyBnR360.title}</h2>
           <p className="text-xl mb-4">{content.whyBnR360.description}</p>
-          <p className="text-2xl font-bold text-blue-600 mb-8">{content.whyBnR360.tagline}</p>
+          <p className="text-2xl font-bold  mb-8">{content.whyBnR360.tagline}</p>
           <div className="space-x-4">
-            <Link href="/contact" className="bg-blue-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300">
+            <Link href="/contact" className="gradient-bg text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300">
               Book a Demo
             </Link>
-            <Link href="/contact" className="bg-white text-blue-600 border border-blue-600 px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300">
+            <Link href="/contact" className="gradient-bg px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-50 transition duration-300">
               Contact us →
             </Link>
           </div>

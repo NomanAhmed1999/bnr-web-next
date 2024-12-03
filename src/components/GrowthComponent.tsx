@@ -35,9 +35,9 @@ export default function GrowthComponent() {
 
   return (
     <main className="min-h-screen bg-gradient-to-l from-[rgba(78,84,200,0.1)] to-transparent">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-10">
         <section className="mb-12">
-          <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+          <div className=" mx-auto p-6 rounded-lg py-20">
             <h1 className="text-3xl font-bold mb-4">{content.hero.title}</h1>
             <div className="w-16 h-1 bg-blue-600 mb-4"></div>
             <p className="text-gray-500 italic mb-4">{content.hero.date}</p>
@@ -47,11 +47,11 @@ export default function GrowthComponent() {
 
         {content.sections.map((section, index) => (
           <section key={index} className="mb-8">
-            <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+            <div className=" mx-auto p-6">
               <h2 className="text-2xl font-bold mb-4">{section.title}</h2>
               <div className="w-16 h-1 bg-blue-600 mb-4"></div>
               {section.isQuote ? (
-                <blockquote className="border-l-4 border-gray-300 pl-4 italic text-lg bg-gray-50 p-4 rounded">
+                <blockquote className="border-l-4 border-gray-300 pl-4 italic text-lg p-4 rounded">
                   <p>{section.content}</p>
                 </blockquote>
               ) : (

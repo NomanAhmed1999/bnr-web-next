@@ -133,12 +133,12 @@ export default function SphereComponent() {
 
     return (
         <>
-            <div className="bg-gradient-to-b from-blue-400 to-indigo-800 text-white py-20">
+            <div className="gradient-bg text-white">
                 <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
                     <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
                         <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.banner.title}</h1>
                         <p className="text-xl mb-8">{content.banner.description}</p>
-                        <Link href={content.banner.ctaLink} className="bg-white text-indigo-800 px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition duration-300">
+                        <Link href={content.banner.ctaLink} className="border-2 text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition duration-300">
                             {content.banner.ctaText}
                         </Link>
                     </div>
@@ -157,7 +157,7 @@ export default function SphereComponent() {
                                 <p className="text-gray-600">{feature.description}</p>
                             </div>
                             <div className="md:w-1/2">
-                                <Image src={feature.image} alt={feature.title} width={500} height={300} className="rounded-lg shadow-md" />
+                                <Image src={feature.image} alt={feature.title} width={500} height={300} className="rounded-lg" />
                             </div>
                         </div>
                     ))}
@@ -197,7 +197,7 @@ export default function SphereComponent() {
                                         ))}
                                     </Slider>
                                     <button
-                                        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md"
+                                        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2"
                                         onClick={() => sliderRef.current?.slickPrev()}
                                     >
                                         <FiChevronLeft className="text-2xl text-indigo-600" />
@@ -220,7 +220,7 @@ export default function SphereComponent() {
                     <h2 className="text-3xl font-bold text-center mb-4">{content.insights.title}</h2>
                     <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">{content.insights.description}</p>
                     <div className="flex justify-center">
-                        <Image src={content.insights.image} alt="Insights Dashboard" width={800} height={450} className="rounded-lg shadow-lg" />
+                        <Image src={content.insights.image} alt="Insights Dashboard" width={800} height={450} className="rounded-lg" />
                     </div>
                 </div>
             </section>
@@ -232,12 +232,12 @@ export default function SphereComponent() {
                             <h2 className="text-3xl font-bold mb-4">{content.videoSection.title}</h2>
                             <p className="text-gray-600 mb-6">{content.videoSection.description}</p>
                             <Link
-                                href={content.videoSection.ctaLink} className="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition duration-300">
+                                href={content.videoSection.ctaLink} className="gradient-bg text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition duration-300">
                                 {content.videoSection.ctaText}
                             </Link>
                         </div>
                         <div className="md:w-1/2">
-                            <Image src={content.videoSection.image} alt="YouTube Tablet" width={500} height={300} className="rounded-lg shadow-md" />
+                            <Image src={content.videoSection.image} alt="YouTube Tablet" width={500} height={300} className="rounded-lg" />
                         </div>
                     </div>
                 </div>
