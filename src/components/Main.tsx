@@ -137,23 +137,27 @@ export default function MainComponent() {
     }
 
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       try {
-    //         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/website-content/`);
-    //         if (!response.ok) throw new Error('Failed to fetch data');
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+          try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/website-content/`);
+            if (!response.ok) throw new Error('Failed to fetch data');
             
-    //         const result = await response.json();
-    //         setData(result.data);
-    //       } catch (err: any) {
-    //         setError(err.message);
-    //       } finally {
-    //         setLoading(false);
-    //       }
-    //     };
+            const result = await response.json();
+            console.log(result.data);
+            
+            // setData(result.data);
+          } catch (err: any) {
+            setError(err.message);
+            setLoading(false);
+          } finally {
+            setLoading(false);
+          }
+        };
     
-    //     fetchData();
-    //   }, []);
+        fetchData();
+      }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -165,7 +169,7 @@ export default function MainComponent() {
 
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+//   if (error) return <p>Error: {error}</p>;
 
 
 

@@ -15,23 +15,23 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Products</h4>
             <ul>
-              <li><Link href="/pages/genrapide.html" className="hover:text-indigo-400">GeneRapide</Link></li>
-              <li><Link href="/pages/sphere.html" className="hover:text-indigo-400">Sphere</Link></li>
+              <li><Link href="/genrapide" className="hover:text-indigo-400">GeneRapide</Link></li>
+              <li><Link href="/sphere" className="hover:text-indigo-400">Sphere</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul>
-              <li><Link href="/pages/service.html" className="hover:text-indigo-400">TurnKey Solutions</Link></li>
-              <li><Link href="/pages/service.html" className="hover:text-indigo-400">Enterprise</Link></li>
-              <li><Link href="/pages/service.html" className="hover:text-indigo-400">Pay Per Need</Link></li>
+              <li><Link href="/service" className="hover:text-indigo-400">TurnKey Solutions</Link></li>
+              <li><Link href="/service" className="hover:text-indigo-400">Enterprise</Link></li>
+              <li><Link href="/service" className="hover:text-indigo-400">Pay Per Need</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Resources</h4>
             <ul>
-              <li><Link href="/pages/contact.html" className="hover:text-indigo-400">Contact</Link></li>
-              <li><Link href="/pages/blogs.html" className="hover:text-indigo-400">Blog</Link></li>
+              <li><Link href="/contact" className="hover:text-indigo-400">Contact</Link></li>
+              <li><Link href="/blogs" className="hover:text-indigo-400">Blog</Link></li>
             </ul>
           </div>
         </div>

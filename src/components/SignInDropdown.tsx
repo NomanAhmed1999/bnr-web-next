@@ -1,34 +1,40 @@
 "use client"
 
 import * as React from "react"
-
-import { Button } from "@/components/ui/button"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+    Menubar,
+    MenubarContent,
+    MenubarItem,
+    MenubarMenu,
+    MenubarSeparator,
+    MenubarTrigger,
+} from "@/components/ui/menubar"
+import Image from "next/image"
+import Link from "next/link"
+
 
 export function DropdownMenuRadioGroupDemo() {
-  const [position, setPosition] = React.useState("bottom")
 
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">Sign In</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        {/* <DropdownMenuLabel>Sign In</DropdownMenuLabel> */}
-        <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
+    return (
+        <Menubar>
+            <MenubarMenu>
+                <MenubarTrigger>Sign In</MenubarTrigger>
+                <MenubarContent>
+                    <MenubarItem>
+                        <Link href="https://sphere.bnr360.com" className="flex justify-center items-center">
+                            <Image src="/images/spheres.webp" alt="BnR360 Logo" width={120} height={120} />
+                            {/* <p className="ml-4 text-2xl">Sphere</p> */}
+                        </Link>
+                    </MenubarItem>
+                    <MenubarSeparator />
+                    <MenubarItem>
+                        <Link href="https://genrapide.bnr360.com" className="flex justify-center items-center p-2">
+                            <Image src="/images/gen-logo.webp" alt="BnR360 Logo" width={140} height={140} />
+                            {/* <p className="ml-4 text-2xl">Sphere</p> */}
+                        </Link>
+                    </MenubarItem>
+                </MenubarContent>
+            </MenubarMenu>
+        </Menubar>
+    )
 }
