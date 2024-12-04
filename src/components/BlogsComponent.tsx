@@ -3,9 +3,12 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ApiEndPoint, imgLoader } from '@/lib/utils'
 
 export default function BlogsPage() {
   const [activeTab, setActiveTab] = useState('All')
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [content, setContent] = useState({
     hero: {
       title: "Blogs",
@@ -69,6 +72,38 @@ export default function BlogsPage() {
     ]
   })
 
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+        setLoading(true);
+      try {
+        const response = await fetch(`${ApiEndPoint}/blogs/blog-data/`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        
+        const result = await response.json();
+        console.log(result);
+        
+        setContent(result);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+
+
+if (loading) return <p>Loading...</p>;
+
+
+
   const filteredPosts = content.blogPosts.filter(post => 
     activeTab === 'All' || post.category === activeTab
   )
@@ -111,6 +146,7 @@ export default function BlogsPage() {
           <h2 className="text-3xl font-bold mb-8">Recent post</h2>
           <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
             <Image 
+              loader={imgLoader}
               src={content.recentPost.image} 
               alt={content.recentPost.title}
               width={600}
@@ -144,6 +180,7 @@ export default function BlogsPage() {
             {filteredPosts.map((post, index) => (
               <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
                 <Image 
+                  loader={imgLoader}
                   src={post.image} 
                   alt={post.title}
                   width={400}
@@ -154,7 +191,7 @@ export default function BlogsPage() {
                   <span className="text-blue-600 font-semibold">{post.category}</span>
                   <h3 className="text-xl font-bold mt-2 mb-2">{post.title}</h3>
                   <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                  <Link href={post.link} className="text-blue-600 hover:underline">
+                  <Link href={`articles/${post.link}`} className="text-blue-600 hover:underline">
                     read more...
                   </Link>
                   <div className="flex items-center mt-4">

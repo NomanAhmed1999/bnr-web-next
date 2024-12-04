@@ -9,9 +9,12 @@ import Slider from "react-slick"
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ApiEndPoint } from '@/lib/utils'
 
 export default function SphereComponent() {
-    const [content, setContent] = useState({
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+    const [data, setData] = useState({
         banner: {
             title: "Sphere: Precision in Every Process",
             description: "With Sphere, experience the power of efficiency in recruitment and bid management, fused with the intelligence of ERP, CRM, and Data Analytics—all in one place.",
@@ -131,33 +134,66 @@ export default function SphereComponent() {
         arrows: false,
     }
 
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+          try {
+            const response = await fetch(`${ApiEndPoint}/api/sphere/`);
+            if (!response.ok) throw new Error('Failed to fetch data');
+            
+            const result = await response.json();
+            console.log(result);
+            
+            setData(result);
+          } catch (err: any) {
+            setError(err.message);
+            setLoading(false);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+
+    const myLoader=({src}: any)=>{
+        return `${ApiEndPoint}/api${src}`;
+      }
+
+
+  if (loading) return <p>Loading...</p>;
+
+
+
     return (
         <>
             <div className="gradient-bg text-white">
                 <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
                     <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.banner.title}</h1>
-                        <p className="text-xl mb-8">{content.banner.description}</p>
-                        <Link href={content.banner.ctaLink} className="border-2 text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition duration-300">
-                            {content.banner.ctaText}
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4">{data.banner.title}</h1>
+                        <p className="text-xl mb-8">{data.banner.description}</p>
+                        <Link href={data.banner.ctaLink} className="border-2 text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition duration-300">
+                            {data.banner.ctaText}
                         </Link>
                     </div>
                     <div className="md:w-1/2">
-                        <Image src={content.banner.image} alt="Sphere Banner" width={500} height={500} className="w-full h-auto" />
+                        <Image loader={myLoader} src={data.banner.image} alt="Sphere Banner" width={500} height={500} className="w-full h-auto" />
                     </div>
                 </div>
             </div>
 
             <section className="py-16">
                 <div className="container mx-auto px-4">
-                    {content.features.map((feature, index) => (
+                    {data.features.map((feature, index) => (
                         <div key={index} className={`flex flex-col md:flex-row items-center mb-16 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}>
                             <div className="md:w-1/2 mb-8 md:mb-0">
                                 <h2 className="text-3xl font-bold mb-4">{feature.title}</h2>
                                 <p className="text-gray-600">{feature.description}</p>
                             </div>
                             <div className="md:w-1/2">
-                                <Image src={feature.image} alt={feature.title} width={500} height={300} className="rounded-lg" />
+                                <Image loader={myLoader} src={feature.image} alt={feature.title} width={500} height={300} className="rounded-lg" />
                             </div>
                         </div>
                     ))}
@@ -166,12 +202,12 @@ export default function SphereComponent() {
 
             <section className="bg-gray-100 py-16">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold text-center mb-4">{content.modules.title}</h2>
-                    <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">{content.modules.description}</p>
+                    <h2 className="text-3xl font-bold text-center mb-4">{data.modules.title}</h2>
+                    <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">{data.modules.description}</p>
 
-                    <Tabs defaultValue={content.modules.categories[0].name} className="w-full">
+                    <Tabs defaultValue={data.modules.categories[0].name} className="w-full">
                         <TabsList className="flex justify-center space-x-2 mb-8">
-                            {content.modules.categories.map((category, index) => (
+                            {data.modules.categories.map((category, index) => (
                                 <TabsTrigger
                                     key={index}
                                     value={category.name}
@@ -181,7 +217,7 @@ export default function SphereComponent() {
                                 </TabsTrigger>
                             ))}
                         </TabsList>
-                        {content.modules.categories.map((category, idx) => (
+                        {data.modules.categories.map((category, idx) => (
                             <TabsContent key={idx} value={category.name} className="mt-8">
                                 <div className="relative">
                                     <Slider ref={sliderRef} {...settings}>
@@ -217,10 +253,10 @@ export default function SphereComponent() {
 
             <section className="py-16">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold text-center mb-4">{content.insights.title}</h2>
-                    <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">{content.insights.description}</p>
+                    <h2 className="text-3xl font-bold text-center mb-4">{data.insights.title}</h2>
+                    <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">{data.insights.description}</p>
                     <div className="flex justify-center">
-                        <Image src={content.insights.image} alt="Insights Dashboard" width={800} height={450} className="rounded-lg" />
+                        <Image loader={myLoader} src={data.insights.image} alt="Insights Dashboard" width={800} height={450} className="rounded-lg" />
                     </div>
                 </div>
             </section>
@@ -229,15 +265,15 @@ export default function SphereComponent() {
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col md:flex-row items-center">
                         <div className="md:w-1/2 mb-8 md:mb-0">
-                            <h2 className="text-3xl font-bold mb-4">{content.videoSection.title}</h2>
-                            <p className="text-gray-600 mb-6">{content.videoSection.description}</p>
+                            <h2 className="text-3xl font-bold mb-4">{data.videoSection.title}</h2>
+                            <p className="text-gray-600 mb-6">{data.videoSection.description}</p>
                             <Link
-                                href={content.videoSection.ctaLink} className="gradient-bg text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition duration-300">
-                                {content.videoSection.ctaText}
+                                href={data.videoSection.ctaLink} className="gradient-bg text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition duration-300">
+                                {data.videoSection.ctaText}
                             </Link>
                         </div>
                         <div className="md:w-1/2">
-                            <Image src={content.videoSection.image} alt="YouTube Tablet" width={500} height={300} className="rounded-lg" />
+                            <Image loader={myLoader} src={data.videoSection.image} alt="YouTube Tablet" width={500} height={300} className="rounded-lg" />
                         </div>
                     </div>
                 </div>
@@ -248,7 +284,7 @@ export default function SphereComponent() {
                     <h2 className="text-3xl font-bold text-center mb-8">FAQs</h2>
                     <div className="max-w-3xl mx-auto">
                         <Accordion type="single" collapsible className="w-full">
-                            {content.faq.map((faq, index) => (
+                            {data.faq.map((faq, index) => (
                                 <AccordionItem key={index} value={`item-${index}`}>
                                     <AccordionTrigger className="text-left">
                                         {faq.question}

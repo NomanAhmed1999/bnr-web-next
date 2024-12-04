@@ -170,7 +170,7 @@ export default function MainComponent() {
 
 
     const myLoader=({src}: any)=>{
-        return `${ApiEndPoint}${src}`;
+        return `${ApiEndPoint}/api${src}`;
       }
 
 

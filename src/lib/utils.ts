@@ -6,4 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export const ApiEndPoint = 'https://www.test.dc3worx.ca/api'
+export const imgLoader=({src}: any)=>{
+  return `${ApiEndPoint}/api${src}`;
+}
+
+export const ApiEndPoint = 'https://www.test.dc3worx.ca'
