@@ -6,26 +6,30 @@ import React, {cache} from 'react'
 
 
 
-export async function generateMetadata({
-    params: { postId },
-}: any): Promise<Metadata> {
-    const response = await fetch(`https://www.test.dc3worx.ca/api/blogs/${postId}`)
-    const post: any = await response
-    return {
-        title: post.title,
-        description: post.body,
-        // openGraph: {
-        //     images: [
-        //         {
-        //             url: post.image
-        //         }
-        //     ]
-        // }
-    }
+// export async function generateMetadata({
+//     params: { postId },
+// }: any): Promise<Metadata> {
+//     const response = await fetch(`https://www.test.dc3worx.ca/api/blogs/${postId}`)
+//     const post: any = await response
+//     return {
+//         title: post.title,
+//         description: post.body,
+//         // openGraph: {
+//         //     images: [
+//         //         {
+//         //             url: post.image
+//         //         }
+//         //     ]
+//         // }
+//     }
+// }
+
+
+export const metadata: Metadata = {
+    title: 'Article'
 }
 
-
-function Prowin(params: { postId: string }) {
+function Prowin() {
     return (
         <>
             <Header />
