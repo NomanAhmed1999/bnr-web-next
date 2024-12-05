@@ -111,7 +111,7 @@ if (loading) return <p>Loading...</p>;
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-blue-600 text-white py-20">
+      <section className="gradient-bg text-white py-20">
         <div className="container mx-auto px-4 flex items-center">
           <Image src="/images/Layer 4.webp" alt="Blog Hero" width={300} height={300} className="mr-8" />
           <div>
@@ -129,7 +129,7 @@ if (loading) return <p>Loading...</p>;
               <button
                 key={tab}
                 className={`px-4 py-2 rounded-full ${
-                  activeTab === tab ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'
+                  activeTab === tab ? 'gradient-bg text-white' : 'bg-gray-200 text-gray-700'
                 }`}
                 onClick={() => setActiveTab(tab)}
               >
@@ -141,10 +141,10 @@ if (loading) return <p>Loading...</p>;
       </section>
 
       {/* Recent Post */}
-      <section className="py-12 bg-gray-100">
+      <section className="py-12">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8">Recent post</h2>
-          <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="flex flex-col md:flex-row bg-white rounded-lg overflow-hidden">
             <Image 
               loader={imgLoader}
               src={content.recentPost.image} 
@@ -157,7 +157,7 @@ if (loading) return <p>Loading...</p>;
               <span className="text-blue-600 font-semibold">{content.recentPost.category}</span>
               <h3 className="text-2xl font-bold mt-2 mb-4">{content.recentPost.title}</h3>
               <p className="text-gray-600 mb-4">{content.recentPost.excerpt}</p>
-              <Link href="article5.html" className="text-blue-600 hover:underline">
+              <Link href="/articles/2" className="text-blue-600 hover:underline">
                 Read More <i className="fas fa-arrow-right ml-2"></i>
               </Link>
               <div className="flex items-center mt-6">

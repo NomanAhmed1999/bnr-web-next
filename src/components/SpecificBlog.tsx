@@ -38,7 +38,7 @@ export default function SpecificBlog() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-blue-600 text-white py-20">
+      <section className="gradient-bg text-white py-20">
         <div className="container mx-auto px-4 flex items-center">
           <Image src="/images/Layer 4.webp" alt="Blog Hero" width={300} height={300} className="mr-8" />
           <div>
