@@ -14,8 +14,19 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "BnR360",
+  title: {
+    default: "BnR360",
+    template: "%s | BnR360",
+  },
+  icons: {
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '57x57', type: 'image/png' }
+    ],
+  },
   description: "Manage the entire bidding process",
+  twitter: {
+    card: "summary_large_image"
+  },
   verification: {
     google: 'nhX12-I_AyMuRmteAtn4HyKg54ZeAp27xoW-FSCXjxY',
   },

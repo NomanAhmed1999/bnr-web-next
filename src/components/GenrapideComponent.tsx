@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
@@ -9,9 +9,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { ApiEndPoint, imgLoader } from '@/lib/utils'
 
 export default function GenRapidePage() {
-  const [content] = useState({
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [content, setContent] = useState({
     hero: {
       title: "GenRapide: Revolutionize Your Bidding Process",
       description: "Harness the power of Generative AI to master RFP triaging and bid submissions. GenRapide is your gateway to excellence in both government and private sectors, streamlining every step from proposal to performance. Get ahead with smarter bidding.",
@@ -44,7 +47,7 @@ export default function GenRapidePage() {
       },
       image: "/images/instant.webp"
     },
-    modules: {
+    modules: [{
       title: "Modules",
       description: "Maximize your bidding and staffing potential with GenRapide's suite of powerful AI modules. Designed for intuitive operation, each module equips you with the tools for success in a competitive landscape.",
       items: [
@@ -61,7 +64,7 @@ export default function GenRapidePage() {
           description: "Stay organized and informed. RFP List archives your triaged documents and keeps a detailed record of all activities, ensuring nothing slips through the cracks."
         }
       ]
-    },
+    }],
     youtube: {
       title: "Explore BnR360 on YouTube",
       description: "From detailed tutorials to insights on our innovative web applications, our videos are designed to enhance your understanding and utilization of our AI-powered solutions. Subscribe and stay updated with the latest tips, trends, and features that BnR360 has to offer.",
@@ -132,6 +135,37 @@ export default function GenRapidePage() {
     }
   })
 
+
+  
+    
+  useEffect(() => {
+    const fetchData = async () => {
+        setLoading(true);
+      try {
+        const response = await fetch(`${ApiEndPoint}/genrapide/data/`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        
+        const result = await response.json();
+        console.log(result);
+        
+        setContent(result);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+
+
+if (loading) return <p>Loading...</p>;
+
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -147,6 +181,7 @@ export default function GenRapidePage() {
             </div>
             <div className="md:w-1/2">
               <Image 
+               loader={imgLoader}
                 src={content.hero.image}
                 alt="GenRapide Banner"
                 width={500}
@@ -167,6 +202,7 @@ export default function GenRapidePage() {
           </div>
           <div className="flex justify-center">
             <Image 
+             loader={imgLoader}
               src={content.resume.image}
               alt="Resume"
               width={800}
@@ -187,6 +223,7 @@ export default function GenRapidePage() {
           <div className="flex flex-wrap justify-center gap-8">
             {content.rfp.images.map((image, index) => (
               <Image 
+              loader={imgLoader}
                 key={index}
                 src={image}
                 alt={`RFP Image ${index + 1}`}
@@ -211,6 +248,7 @@ export default function GenRapidePage() {
           </div>
           <div className="flex justify-center">
             <Image 
+             loader={imgLoader}
               src={content.insights.image}
               alt="Insights Dashboard"
               width={800}
@@ -225,11 +263,11 @@ export default function GenRapidePage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{content.modules.title}</h2>
-            <p className="text-xl">{content.modules.description}</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{content.modules[0].title}</h2>
+            <p className="text-xl">{content.modules[0].description}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {content.modules.items.map((module, index) => (
+            {content.modules[0].items.map((module: any, index: number) => (
               <div key={index} className="bg-white p-6 rounded-lg border-2">
                 <h3 className="text-2xl font-bold mb-4">{module.title}</h3>
                 <p>{module.description}</p>
@@ -246,6 +284,7 @@ export default function GenRapidePage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{content.youtube.title}</h2>
             <p className="text-xl mb-8">{content.youtube.description}</p>
             <Image 
+             loader={imgLoader}
               src={content.youtube.image}
               alt="YouTube Tablet"
               width={800}
@@ -272,6 +311,7 @@ export default function GenRapidePage() {
             </div>
             <div className="md:w-1/2">
               <Image 
+               loader={imgLoader}
                 src={content.blog.image}
                 alt="Blog Reference"
                 width={100}
