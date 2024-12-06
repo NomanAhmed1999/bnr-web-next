@@ -10,6 +10,7 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ApiEndPoint } from '@/lib/utils'
+import SkeletonComponent from './SkeletonComponent'
 
 export default function SphereComponent() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -139,11 +140,10 @@ export default function SphereComponent() {
         const fetchData = async () => {
             setLoading(true);
           try {
-            const response = await fetch(`${ApiEndPoint}/api/sphere/`);
+            const response = await fetch(`${ApiEndPoint}/sphere/data/`);
             if (!response.ok) throw new Error('Failed to fetch data');
             
             const result = await response.json();
-            console.log(result);
             
             setData(result);
           } catch (err: any) {
@@ -163,9 +163,10 @@ export default function SphereComponent() {
       }
 
 
-  if (loading) return <p>Loading...</p>;
 
-
+      if (loading) {
+        return <SkeletonComponent />
+      };
 
     return (
         <>
@@ -174,7 +175,7 @@ export default function SphereComponent() {
                     <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
                         <h1 className="text-4xl md:text-5xl font-bold mb-4">{data.banner.title}</h1>
                         <p className="text-xl mb-8">{data.banner.description}</p>
-                        <Link href={data.banner.ctaLink} className="border-2 text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition duration-300">
+                        <Link href={data?.banner?.ctaLink || '#'} className="border-2 text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition duration-300">
                             {data.banner.ctaText}
                         </Link>
                     </div>
@@ -205,7 +206,7 @@ export default function SphereComponent() {
                     <h2 className="text-3xl font-bold text-center mb-4">{data.modules.title}</h2>
                     <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">{data.modules.description}</p>
 
-                    <Tabs defaultValue={data.modules.categories[0].name} className="w-full">
+                    <Tabs defaultValue={data.modules.categories[0]?.name} className="w-full">
                         <TabsList className="flex justify-center space-x-2 mb-8">
                             {data.modules.categories.map((category, index) => (
                                 <TabsTrigger
@@ -268,7 +269,7 @@ export default function SphereComponent() {
                             <h2 className="text-3xl font-bold mb-4">{data.videoSection.title}</h2>
                             <p className="text-gray-600 mb-6">{data.videoSection.description}</p>
                             <Link
-                                href={data.videoSection.ctaLink} className="gradient-bg text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition duration-300">
+                                href={data?.videoSection?.ctaLink || '#'} className="gradient-bg text-white px-6 py-3 rounded-md hover:bg-indigo-700 transition duration-300">
                                 {data.videoSection.ctaText}
                             </Link>
                         </div>

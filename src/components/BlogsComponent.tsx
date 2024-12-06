@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ApiEndPoint, imgLoader } from '@/lib/utils'
+import SkeletonComponent from './SkeletonComponent'
 
 export default function BlogsPage() {
   const [activeTab, setActiveTab] = useState('All')
@@ -99,12 +100,12 @@ export default function BlogsPage() {
 
 
 
+  if (loading) {
+    return <SkeletonComponent />
+  };
 
-if (loading) return <p>Loading...</p>;
 
-
-
-  const filteredPosts = content.blogPosts.filter(post => 
+  const filteredPosts = content?.blogPosts?.filter(post => 
     activeTab === 'All' || post.category === activeTab
   )
 
@@ -125,7 +126,7 @@ if (loading) return <p>Loading...</p>;
       <section className="py-8">
         <div className="container mx-auto px-4">
           <div className="flex justify-center space-x-4">
-            {content.tabs.map((tab) => (
+            {content.tabs?.map((tab) => (
               <button
                 key={tab}
                 className={`px-4 py-2 rounded-full ${
@@ -147,24 +148,24 @@ if (loading) return <p>Loading...</p>;
           <div className="flex flex-col md:flex-row bg-white rounded-lg overflow-hidden">
             <Image 
               loader={imgLoader}
-              src={content.recentPost.image} 
-              alt={content.recentPost.title}
+              src={content.recentPost?.image} 
+              alt={content.recentPost?.title}
               width={600}
               height={400}
               className="w-full md:w-1/2 object-cover"
             />
             <div className="p-8">
-              <span className="text-blue-600 font-semibold">{content.recentPost.category}</span>
-              <h3 className="text-2xl font-bold mt-2 mb-4">{content.recentPost.title}</h3>
-              <p className="text-gray-600 mb-4">{content.recentPost.excerpt}</p>
+              <span className="text-blue-600 font-semibold">{content.recentPost?.category}</span>
+              <h3 className="text-2xl font-bold mt-2 mb-4">{content.recentPost?.title}</h3>
+              <p className="text-gray-600 mb-4">{content.recentPost?.excerpt}</p>
               <Link href="/articles/2" className="text-blue-600 hover:underline">
                 Read More <i className="fas fa-arrow-right ml-2"></i>
               </Link>
               <div className="flex items-center mt-6">
                 <i className="fi fi-sr-user-add mr-2"></i>
                 <div>
-                  <h4 className="font-semibold">{content.recentPost.author}</h4>
-                  <p className="text-sm text-gray-500">{content.recentPost.date}</p>
+                  <h4 className="font-semibold">{content.recentPost?.author}</h4>
+                  <p className="text-sm text-gray-500">{content.recentPost?.date}</p>
                 </div>
               </div>
             </div>
@@ -177,28 +178,28 @@ if (loading) return <p>Loading...</p>;
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8">Read more</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post, index) => (
+            {filteredPosts?.map((post, index) => (
               <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
                 <Image 
                   loader={imgLoader}
-                  src={post.image} 
-                  alt={post.title}
+                  src={post?.image} 
+                  alt={post?.title}
                   width={400}
                   height={250}
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <span className="text-blue-600 font-semibold">{post.category}</span>
-                  <h3 className="text-xl font-bold mt-2 mb-2">{post.title}</h3>
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                  <Link href={`articles/${post.link}`} className="text-blue-600 hover:underline">
+                  <span className="text-blue-600 font-semibold">{post?.category}</span>
+                  <h3 className="text-xl font-bold mt-2 mb-2">{post?.title}</h3>
+                  <p className="text-gray-600 mb-4">{post?.excerpt}</p>
+                  <Link href={`articles/${post?.link}`} className="text-blue-600 hover:underline">
                     read more...
                   </Link>
                   <div className="flex items-center mt-4">
                     <i className="fi fi-sr-user-add mr-2"></i>
                     <div>
-                      <h4 className="font-semibold">{post.author}</h4>
-                      <p className="text-sm text-gray-500">{post.date}</p>
+                      <h4 className="font-semibold">{post?.author}</h4>
+                      <p className="text-sm text-gray-500">{post?.date}</p>
                     </div>
                   </div>
                 </div>

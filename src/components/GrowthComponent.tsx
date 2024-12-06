@@ -1,11 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import SkeletonComponent from './SkeletonComponent'
+import { ApiEndPoint } from '@/lib/utils'
 
 export default function GrowthComponent() {
-  const [content] = useState({
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+  const [content, setContent] = useState({
     hero: {
       title: "BnR360 Welcomes New Customer Growth: Zernam and Contract Community OnBoard",
       date: "Ottawa, ON – April 30, 2024",
@@ -33,19 +37,53 @@ export default function GrowthComponent() {
     ]
   })
 
+
+  
+    
+  useEffect(() => {
+    const fetchData = async () => {
+        setLoading(true);
+      try {
+        const response = await fetch(`${ApiEndPoint}/solution/data/`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        
+        const result = await response.json();
+        
+        setContent(result);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+
+
+
+  if (loading) {
+    return <SkeletonComponent />
+  };
+
+
   return (
     <main className="min-h-screen bg-gradient-to-l from-[rgba(78,84,200,0.1)] to-transparent">
       <div className="container mx-auto px-4 py-10">
         <section className="mb-12">
           <div className=" mx-auto p-6 rounded-lg py-20">
-            <h1 className="text-3xl font-bold mb-4">{content.hero.title}</h1>
+            <h1 className="text-3xl font-bold mb-4">{content.hero?.title}</h1>
             <div className="w-16 h-1 bg-blue-600 mb-4"></div>
-            <p className="text-gray-500 italic mb-4">{content.hero.date}</p>
-            <p className="text-base">{content.hero.description}</p>
+            <p className="text-gray-500 italic mb-4">{content.hero?.date}</p>
+            <p className="text-base">{content.hero?.description}</p>
           </div>
         </section>
 
-        {content.sections.map((section, index) => (
+        {content.sections?.map((section, index) => (
           <section key={index} className="mb-8">
             <div className=" mx-auto p-6">
               <h2 className="text-2xl font-bold mb-4">{section.title}</h2>
@@ -56,7 +94,7 @@ export default function GrowthComponent() {
                 </blockquote>
               ) : (
                 <div>
-                  {section.content.split('\n\n').map((paragraph, pIndex) => (
+                  {section.content.split('\n\n')?.map((paragraph, pIndex) => (
                     <p key={pIndex} className="text-base mb-4">
                       {section.hasLink && pIndex === 1 ? (
                         <>

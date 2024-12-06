@@ -4,8 +4,12 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import SkeletonComponent from './SkeletonComponent'
+import { ApiEndPoint } from '@/lib/utils'
 
 export default function ContactComponent() {
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
   const [content, setContent] = useState({
     hero: {
       title: "Want to learn how we can help you out?",
@@ -182,6 +186,43 @@ export default function ContactComponent() {
     }
   }
 
+
+  
+    
+  useEffect(() => {
+    const fetchData = async () => {
+        setLoading(true);
+      try {
+        const response = await fetch(`${ApiEndPoint}/contact/data/`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        
+        const result = await response.json();
+        
+        setContent(result);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+const myLoader=({src}: any)=>{
+    return `${ApiEndPoint}/api${src}`;
+  }
+
+
+
+  if (loading) {
+    return <SkeletonComponent />
+  };
+
+
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -189,15 +230,15 @@ export default function ContactComponent() {
   <div className="container mx-auto px-4 flex flex-wrap md:flex-nowrap items-start gap-8">
     {/* Hero Section */}
     <div className="md:w-1/2">
-      <h1 className="text-4xl md:text-5xl font-bold mb-4 mt-12">{content.hero.title}</h1>
-      <p className="text-xl mb-2">{content.hero.subtitle}</p>
-      <p className="text-lg">{content.hero.description}</p>
+      <h1 className="text-4xl md:text-5xl font-bold mb-4 mt-12">{content.hero?.title}</h1>
+      <p className="text-xl mb-2">{content.hero?.subtitle}</p>
+      <p className="text-lg">{content.hero?.description}</p>
     </div>
 
     {/* Contact Boxes */}
     <div className="md:w-1/2">
     <div className="grid md:grid-cols-2">
-  {content.contactBoxes.map((box, index) => (
+  {content.contactBoxes?.map((box, index) => (
     <div
       key={index}
       className={`bg-gray-100 text-black p-6 rounded-lg shadow-md transform transition duration-300 ${

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Slider from 'react-slick'
 import { ApiEndPoint } from '@/lib/utils'
+import SkeletonComponent from './SkeletonComponent'
 
 export default function MainComponent() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -174,7 +175,9 @@ export default function MainComponent() {
       }
 
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return <SkeletonComponent />
+  };
 //   if (error) return <p>Error: {error}</p>;
 
 

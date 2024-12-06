@@ -1,10 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ApiEndPoint } from '@/lib/utils'
+import SkeletonComponent from './SkeletonComponent'
 
 export default function ProWinPage() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [content, setContent] = useState({
     hero: {
       title: "Smart Recruitment and Proposal Management Solutions by BnR360",
@@ -79,12 +83,46 @@ export default function ProWinPage() {
       description: "Automate Your Entire Recruitment & Proposal Process. Save time, reduce manual tasks, and boost productivity by bundling these powerful solutions together. Handle recruitment and proposals faster and smarter.",
       discount: "💼 Save 15% when you bundle these products!"
     },
-    whyBnR360: {
+    bundle_offer: {
       title: "Why BnR360?",
       description: "Our solutions offer robust security features, seamless integration, and scalable packages to fit your needs, no matter the size of your business.",
       tagline: "🔒 Secure. Reliable. Scalable."
     }
   })
+
+
+  
+    
+  useEffect(() => {
+    const fetchData = async () => {
+        setLoading(true);
+      try {
+        const response = await fetch(`${ApiEndPoint}/prowin/data/`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        
+        const result = await response.json();
+        console.log(result);
+        
+        setContent(result);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+const myLoader=({src}: any)=>{
+    return `${ApiEndPoint}/api${src}`;
+  }
+
+  if (loading) {
+    return <SkeletonComponent />
+  };
 
   return (
     <main className="min-h-screen bg-white text-black">
@@ -99,7 +137,7 @@ export default function ProWinPage() {
       </section>
 
       {/* Main Content Sections */}
-      {content.sections.map((section: any, index) => (
+      {content.sections?.map((section: any, index) => (
         <section key={section.id} id={section.id} className="py-20">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8 text-center">{section.title}</h2>
@@ -118,7 +156,7 @@ export default function ProWinPage() {
                   </ul>
                 </div>
                 <div className="md:w-1/2">
-                  <Image src={section.image} alt="AI Chatbot" width={500} height={300} className="rounded-lg shadow-xl" />
+                  <Image loader={myLoader} src={section.image} alt="AI Chatbot" width={500} height={300} className="rounded-lg shadow-xl" />
                 </div>
               </div>
             )}
@@ -127,7 +165,7 @@ export default function ProWinPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {section.features.map((feature: any, featureIndex: any) => (
                   <div key={featureIndex} className="bg-white rounded-lg shadow-xl p-6 text-center">
-                    <Image src={feature.image} alt={feature.title} width={150} height={150} className="mx-auto mb-4" />
+                    <Image loader={myLoader} src={feature.image} alt={feature.title} width={150} height={150} className="mx-auto mb-4" />
                     <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                     <p>{feature.description}</p>
                   </div>
@@ -152,9 +190,9 @@ export default function ProWinPage() {
       {/* Bundle Offer Section */}
       <section className="bg-gray-100 py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">{content.bundleOffer.title}</h2>
-          <p className="text-xl mb-4">{content.bundleOffer.description}</p>
-          <p className="text-2xl font-bold mb-8">{content.bundleOffer.discount}</p>
+          <h2 className="text-3xl font-bold mb-6">{content.bundleOffer?.title}</h2>
+          <p className="text-xl mb-4">{content.bundleOffer?.description}</p>
+          <p className="text-2xl font-bold mb-8">{content.bundleOffer?.discount}</p>
           <Link href="/pricing" className="gradient-bg text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300">
             Special Pricing →
           </Link>
@@ -164,9 +202,9 @@ export default function ProWinPage() {
       {/* Why BnR360 Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">{content.whyBnR360.title}</h2>
-          <p className="text-xl mb-4">{content.whyBnR360.description}</p>
-          <p className="text-2xl font-bold  mb-8">{content.whyBnR360.tagline}</p>
+          <h2 className="text-3xl font-bold mb-6">{content.bundle_offer.title}</h2>
+          <p className="text-xl mb-4">{content.bundle_offer.description}</p>
+          <p className="text-2xl font-bold  mb-8">{content.bundle_offer.tagline}</p>
           <div className="space-x-4">
             <Link href="/contact" className="gradient-bg text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-300">
               Book a Demo

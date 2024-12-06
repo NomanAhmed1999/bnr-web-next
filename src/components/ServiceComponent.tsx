@@ -1,10 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ApiEndPoint } from '@/lib/utils';
+import SkeletonComponent from './SkeletonComponent';
 
 export default function ServiceComponent() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [content, setContent] = useState({
     hero: {
       title: "BnR360 as a Service",
@@ -81,9 +85,38 @@ export default function ServiceComponent() {
     ]
   })
 
-  const myLoader=({src}: any)=>{
-    return src;
+    
+  useEffect(() => {
+    const fetchData = async () => {
+        setLoading(true);
+      try {
+        const response = await fetch(`${ApiEndPoint}/service/data/`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        
+        const result = await response.json();
+        
+        setContent(result);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+const myLoader=({src}: any)=>{
+    return `${ApiEndPoint}/api${src}`;
   }
+
+
+
+  if (loading) {
+    return <SkeletonComponent />
+  };
 
   return (
     <main className="min-h-screen bg-white">
@@ -92,20 +125,20 @@ export default function ServiceComponent() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-10 md:mb-0">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
-              <p className="text-lg mb-8">{content.hero.description}</p>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">{content.hero?.title}</h1>
+              <p className="text-lg mb-8">{content.hero?.description}</p>
               <div className="space-x-4">
                 <Link href="/solution" className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
                   Solutions
                 </Link>
                 <Link href="#payPerNeed" className="bg-gray-200 text-gray-800 px-6 py-3 rounded-md hover:bg-gray-300 transition duration-300">
-                  Add Ons
+                  Add Ones
                 </Link>
               </div>
             </div>
             <div className="">
               <Image 
-                src={content.hero.image}
+                src={content?.hero?.image}
                 alt="BnR360 Service Image"
                 width={400}
                 height={200}
@@ -121,21 +154,21 @@ export default function ServiceComponent() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Core <span className="text-blue-600">Services</span></h2>
           
-          {content.coreServices.map((service, index) => (
+          {content.coreServices?.map((service, index) => (
             <div key={index} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center mb-20`}>
               <div className="md:w-1/2 mb-10 md:mb-0 md:px-10">
                 <h3 className="text-2xl font-semibold mb-4">{service.title}</h3>
                 <p className="mb-4">{service.description}</p>
                 <ul className="list-disc pl-5 space-y-2">
-                  {service.points.map((point, pointIndex) => (
+                  {service.points?.map((point, pointIndex) => (
                     <li key={pointIndex}>{point}</li>
                   ))}
                 </ul>
               </div>
               <div className="md:w-1/2">
                 <Image 
-                  src={service.image}
-                  alt={service.title}
+                  src={service?.image}
+                  alt={service?.title}
                   width={500}
                   height={300}
                   className="rounded-lg"
@@ -149,13 +182,13 @@ export default function ServiceComponent() {
       {/* Flexible Pricing Plans Section */}
       <section className="bg-gray-100 py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">{content.flexiblePricing.title}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">{content.flexiblePricing?.title}</h2>
           <p className="text-center mb-12 max-w-2xl mx-auto">
-            {content.flexiblePricing.description}
+            {content.flexiblePricing?.description}
           </p>
           <div className="flex justify-center">
             <Image 
-              src={content.flexiblePricing.image}
+              src={content.flexiblePricing?.image}
               alt="Pricing Plans"
               width={800}
               height={400}
@@ -171,7 +204,7 @@ export default function ServiceComponent() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Pay Per Need</h2>
           <p className="text-center mb-12">Add on to your basic and professional plan</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {content.payPerNeed.map((item, index) => (
+            {content.payPerNeed?.map((item, index) => (
               <div key={index} className="bg-white rounded-lg shadow-xl p-6 flex flex-col items-center">
                 <Image 
                   src={item.image}
@@ -196,7 +229,7 @@ export default function ServiceComponent() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Why Choose <span className="text-blue-600">BnR360</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {content.whyChooseBnR360.map((item, index) => (
+            {content.whyChooseBnR360?.map((item, index) => (
               <div key={index} className="bg-white rounded-lg shadow-xl p-6">
                 <Image
                  loader={myLoader} 
@@ -220,7 +253,7 @@ export default function ServiceComponent() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">Our <span className="text-blue-600">Specialization</span></h2>
           <p className="text-center mb-12">If your business is serving these industries, our services are well trained and tailor made to support you:</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {content.specialization.map((item, index) => (
+            {content.specialization?.map((item, index) => (
               <div key={index} className="bg-white rounded-lg shadow-xl overflow-hidden">
                 <div className="h-48 relative">
                   <Image 

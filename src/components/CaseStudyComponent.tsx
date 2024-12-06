@@ -1,10 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ApiEndPoint } from '@/lib/utils'
+import SkeletonComponent from './SkeletonComponent'
 
 export default function CaseStudyComponent() {
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
   const [content, setContent] = useState({
     hero: {
       title: "Optimizing Operational Efficiency BnR360's Strategic Partnership with",
@@ -73,6 +77,35 @@ export default function CaseStudyComponent() {
       text: "The partnership between BnR360 and Zernam exemplifies the transformative potential of integrating AI-driven solutions in the staffing and recruitment industry. The substantial improvements in operational efficiency and cost-effectiveness set a benchmark for future collaborations."
     }
   })
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${ApiEndPoint}/solution/data/`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+
+        const result = await response.json();
+
+        setContent(result);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+
+  if (loading) {
+    return <SkeletonComponent />
+  };
 
   return (
     <main className="min-h-screen bg-white">

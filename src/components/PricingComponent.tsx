@@ -1,14 +1,18 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ApiEndPoint } from '@/lib/utils'
+import SkeletonComponent from './SkeletonComponent'
 
 export default function PricingPage() {
   const [activeTab, setActiveTab] = useState('sphere')
   const [isYearly, setIsYearly] = useState(false)
 
-  const content = {
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
+  const [content, setContent] = useState({
     hero: {
       title: "Plans that fit your need",
       description: "No matter the size of your business, we have a plan to streamline your bidding and resourcing processes. Choose from core features to advanced capabilities – find the perfect fit for your company with BnR360.",
@@ -280,7 +284,42 @@ export default function PricingPage() {
         }
       ]
     }
+  })
+
+
+   
+  useEffect(() => {
+    const fetchData = async () => {
+        setLoading(true);
+      try {
+        const response = await fetch(`${ApiEndPoint}/pricing/data/`);
+        if (!response.ok) throw new Error('Failed to fetch data');
+        
+        const result = await response.json();
+        
+        setContent(result);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+const myLoader=({src}: any)=>{
+    return `${ApiEndPoint}/api${src}`;
   }
+
+
+
+  if (loading) {
+    return <SkeletonComponent />
+  };
 
   return (
     <main className="min-h-screen bg-white">
@@ -289,16 +328,16 @@ export default function PricingPage() {
         <div className="container mx-auto px-4 py-10">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="md:w-1/2 mb-10 md:mb-0">
-              <h1 
-className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
-              <p className="text-lg mb-8">{content.hero.description}</p>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">{content.hero?.title}</h1>
+              <p className="text-lg mb-8">{content.hero?.description}</p>
               <Link href="#checkpricing" className="border-2 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">
                 Check pricing
               </Link>
             </div>
             <div className="md:w-1/2">
               <Image 
-                src={content.hero.image}
+                loader={myLoader}
+                src={content.hero?.image}
                 alt="Pricing Monitor"
                 width={500}
                 height={300}
@@ -312,12 +351,12 @@ className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
       {/* Pricing Plans Section */}
       <section id="checkpricing" className="py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">{content.intro.title}</h2>
-          <p className="text-xl text-center mb-12">{content.intro.description}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">{content.intro?.title}</h2>
+          <p className="text-xl text-center mb-12">{content.intro?.description}</p>
 
           {/* Pricing Tabs */}
           <div className="flex flex-wrap justify-center mb-8">
-            {content.tabs.map((tab) => (
+            {content.tabs?.map((tab) => (
               <button
                 key={tab}
                 className={`px-4 py-2 m-2 rounded-md ${activeTab === tab ? 'gradient-bg text-white' : 'bg-gray-200 text-gray-800'}`}
@@ -353,7 +392,7 @@ className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
           {/* Pricing Cards */}
           {(activeTab === 'sphere' || activeTab === 'genrapid' || activeTab === 'solution' || activeTab === 'services') && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {content[activeTab].plans.map((plan: any, index) => (
+              {content[activeTab]?.plans?.map((plan: any, index) => (
                 <div key={index} className="bg-white rounded-lg shadow-xl p-6">
                   <h3 className="text-xl font-bold mb-4">{plan.name}</h3>
                   {typeof plan.price === 'object' ? (
@@ -372,7 +411,7 @@ className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
                     {plan.cta.text}
                   </Link>
                   <ul className="mt-6 space-y-2">
-                    {plan.features && plan.features.map((feature: any, featureIndex: number) => (
+                    {plan.features && plan.features?.map((feature: any, featureIndex: number) => (
                       <li key={featureIndex} className="flex items-center">
                       <span className="mr-2">
                         {feature.value.startsWith('✔') ? (
@@ -401,9 +440,10 @@ className="text-4xl md:text-5xl font-bold mb-6">{content.hero.title}</h1>
               <h2 className="text-3xl font-bold text-center mb-4">{content.payPerNeed.title}</h2>
               <p className="text-xl text-center mb-8">{content.payPerNeed.subtitle}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {content.payPerNeed.plans.map((plan, index) => (
+                {content.payPerNeed?.plans?.map((plan, index) => (
                   <div key={index} className="bg-white rounded-lg shadow-xl p-6 flex flex-col items-center">
                     <Image
+                      loader={myLoader}
                       src={plan.image}
                       alt={plan.name}
                       width={200}

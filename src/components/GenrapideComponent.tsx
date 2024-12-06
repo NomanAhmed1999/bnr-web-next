@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { ApiEndPoint, imgLoader } from '@/lib/utils'
+import SkeletonComponent from './SkeletonComponent'
 
 export default function GenRapidePage() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -163,8 +164,9 @@ export default function GenRapidePage() {
 
 
 
-
-if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return <SkeletonComponent />
+  };
 
   return (
     <main className="min-h-screen bg-white">
